@@ -23,17 +23,18 @@ def _sync(phide_dir, sync_dir, file_name, verbose=True):
 
     if phide_exists and sync_exists:
         phide_t = os.path.getmtime(phide_path)
-        sync_t = os.path.getmtime(sync_exists)
+        sync_t = os.path.getmtime(sync_path)
 
         if phide_t > sync_t:
-            src, dst = phide_dir, sync_path
+            src, dst = phide_path, sync_path
         elif phide_t < sync_t:
-            src, dst = sync_path, phide_dir
+            src, dst = sync_path, phide_path
     elif phide_exists and not sync_exists:
-        src, dst = phide_dir, sync_path
+        src, dst = phide_path, sync_path
 
     if src is not None:
-        if verbose: print("{} -> {}", src, dst)
+        if verbose:
+            print("{} -> {}".format(src, dst))
         shutil.copy2(src, dst)
 
 
@@ -52,15 +53,15 @@ def mirror(phide_dir, sync_dir, sync=False, verbose=True):
         if os.path.isdir(phide_path):
             if file_name not in IGNORED_DIRS:
                 mirror(phide_path, sync_path, child_syncs, verbose)
-        elif sync:
+        elif sync:  # and is file
             extension = os.path.splitext(file_name)[-1].lower()[1:]
             if extension in ACCEPTED_EXTS:
                 _sync(phide_dir, sync_dir, file_name, verbose)
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 1:
+    if len(sys.argv) != 2:
         print("Usage: phide-paper-sync sync-dir")
         sys.exit(1)
 
-    mirror(os.getcwd(), os.path.abspath(sys.argv[0]))
+    mirror(os.getcwd(), os.path.abspath(sys.argv[1]))

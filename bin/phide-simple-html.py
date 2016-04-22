@@ -6,7 +6,7 @@ import sys
 from markdown import markdown
 
 
-IGNORED_NAMES = {".", ".."}
+IGNORED = {".", ".."}
 
 
 def notebook_walker(dir_path):
@@ -18,7 +18,7 @@ def notebook_walker(dir_path):
         path = os.path.join(dir_path, file_name)
         if os.path.isdir(path):
             if first_letter != '.' and first_letter != '_':
-                yield from phide_walker(path)
+                yield from notebook_walker(path)
         else:
             if first_letter != '_' and file_name.endswith(".ipynb"):
                 yield dir_path, path
@@ -80,7 +80,7 @@ def compile_simple_html(base_dir, output_file, verbose=True):
         fp.write(FOOTER)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 1:
+    if len(sys.argv) != 2:
         print("Usage: phide-paper-sync sync-dir")
         sys.exit(1)
 
