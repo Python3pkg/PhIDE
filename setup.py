@@ -6,7 +6,7 @@ README_FILE = os.path.join(os.path.dirname(__file__), 'README.md')
 
 setup(
     name="PhIDE",
-    version="0.0.1",
+    version="0.0.2",
     packages=["phide"], # Basically, reserve that namespace.
     license="License :: OSI Approved :: MIT License",
     author="John Bjorn Nelson",

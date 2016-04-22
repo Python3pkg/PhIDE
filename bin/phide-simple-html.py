@@ -84,5 +84,5 @@ if __name__ == '__main__':
         print("Usage: phide-paper-sync sync-dir")
         sys.exit(1)
 
-    compile_simple_html(os.path.getcwd(), sys.argv[1])
+    compile_simple_html(os.getcwd(), sys.argv[1])
 

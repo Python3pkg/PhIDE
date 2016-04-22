@@ -63,4 +63,4 @@ if __name__ == '__main__':
         print("Usage: phide-paper-sync sync-dir")
         sys.exit(1)
 
-    mirror(os.path.getcwd(), os.path.abspath(sys.argv[0]))
+    mirror(os.getcwd(), os.path.abspath(sys.argv[0]))
