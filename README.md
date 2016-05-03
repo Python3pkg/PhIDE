@@ -22,18 +22,18 @@ Recursively walks the file system -- starting from the current directory --
 for IPython notebooks. Following the PhIDE convention, it skips processing of 
 files or directories which start with a `.` or `_`. Ordering is lexicographic. 
 (I use a convention of naming notebooks as `###_name.ipynb`.) When it reads a 
-markdown cell, it concatinates it to the output HTML (doing markdown to HTML 
-translation). When it encounters an SVG output, it concatenates it to the
-output HTML.
+markdown cell, it concatenates it to the output Pandoc flavored markdown file 
+(`_phide_output/extract.md`). When it encounters an SVG output, it serializes 
+it (to `_phide_output/media/#.svg`) and insert an image into the markdown 
+file. Then, it runs pandoc.
 
-Usage: `$ phide-simple-html output-file`
+Usage: `$ phide-simple-html`
 
 ### What should it do?
 
-The goal is to turn this into a `pandoc`-based tool. I want it to generate a 
-big Pandoc-flavored markdown document, then use pandoc for compilation into 
-alternative formats (e.g. latex). I especially want support for citations via 
-IPython's data-cite convention and `.bibtex` files. 
+I need to add support for pandoc compilation into alternative formats 
+(e.g. latex). I especially want support for citations via IPython's data-cite 
+convention.
 
 It should also support more than just SVG files. And, I want it to support 
 latex-style referencing and figures.
