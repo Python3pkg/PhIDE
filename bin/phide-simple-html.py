@@ -23,7 +23,7 @@ if __name__ == '__main__':
     output_file.write(generate_header(cwd, prefs))
 
     for project_path, full_path in project_walker(cwd):
-        print("Processing: {}".format(full_path))
+        print(("Processing: {}".format(full_path)))
         process_notebook(full_path, output_dir, output_file)
 
     output_file.write("\n# Bibliography\n")

@@ -34,7 +34,7 @@ def _sync(phide_dir, sync_dir, file_name, verbose=True):
 
     if src is not None:
         if verbose:
-            print("{} -> {}".format(src, dst))
+            print(("{} -> {}".format(src, dst)))
         shutil.copy2(src, dst)
 
 
